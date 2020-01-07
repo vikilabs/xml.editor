@@ -1,6 +1,6 @@
 ## Utility to modify XML tag value 
 
-This bash utility can be used to modify XML tag value of an XML file. 
+This bash utility can be used to modify XML tag value of an XML file. This utility is useful for Linux system administrators or embedded programmers to edit XML based configuration files. 
 
 ## Bash Utility:
 
