@@ -1,0 +1,110 @@
+#!/bin/bash
+
+: '
+    Edit Tag Value From XML File
+
+                    Author: Viki (a) Vignesh Natarajan
+                    Firma : vikilabs.org 
+
+'
+
+function create_closing_tag() #arg1=tag_name
+{
+    i=0
+    tag_name=$1
+    n=${#tag_name}
+    
+    closing_tag="<\/"
+    
+    while [ $i -lt $n ]
+    do
+        c="$(get_char_at $tag_name $i)"
+        let "i=i+1"
+
+        if [ "$c" == "<" ]; then
+            continue
+        fi
+
+        if [ -z "$c" ]; then
+            continue
+        fi
+
+        closing_tag=${closing_tag}$c
+    done
+
+    echo $closing_tag
+}
+
+
+function edit_tag_value() #arg1=tag_name, arg2="value", arg3=xml_file_name
+{
+    tag_s=$1
+    value=$2
+    xml_file=$3
+    tag_e="$(create_closing_tag $tag_s)"
+    xml_file_backup=".##"$xml_file 
+    sed -e "s/.*${tag_s}.*/${tag_s}${value}${tag_e}/g" $xml_file >> $xml_file_backup
+    mv $xml_file_backup $xml_file
+}
+
+function get_char_at() #arg1=string arg2=index
+{
+    str=$1
+    index_s=$2
+    no_char=1
+    echo ${str:$index_s:$no_char }
+}
+
+function usage()
+{
+    echo "Usage: "
+    echo ""
+    echo "      edit_xml_tag_value \"<tag_name>\" \"new_tag_value\" \"xml_file_name\""
+    echo ""
+    echo ""
+    echo "Example: "
+    echo ""
+    echo "      edit_xml_tag_value \"<employee_code>\" \"123456\" \"employee_profile.xml\""
+    echo ""
+    echo ""
+}
+
+if [ $# -lt 3 ]; then
+    usage
+    exit 1
+fi
+
+if [ -z "$1" ]; then
+    echo
+    echo "Error: argument 1 is empty"
+    echo
+    usage
+    exit 1
+fi
+
+if [ -z "$2" ]; then
+    echo
+    echo "Error: argument 2 is empty"
+    echo
+    usage
+    exit 1
+fi
+
+if [ -z "$3" ]; then
+    echo
+    echo "Error: argument 3 is empty"
+    echo
+    usage
+    exit 1
+fi
+
+if [ ! -f "$3" ]; then
+    echo
+    echo "Error: xml file not found ($3)"
+    echo
+    exit 1
+fi
+
+edit_tag_value "$1" "$2" "$3"
+#cat $3
+
