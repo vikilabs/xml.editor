@@ -1,13 +1,14 @@
-## Utility to modify XML tag value 
+## XML_editor
 
-This bash utility can be used to modify XML tag value of an XML file. This utility is useful for Linux system administrators or embedded programmers to edit XML based configuration files. 
+XML editor is a command line utility to update values inside an xml file. This utility is fully written in bash. 
+This utility is useful for Linux system administrators or embedded programmers to update XML based configuration files. 
 
 ## Bash Utility:
 
-    - src/edit_xml_tag_value
+    - src/xml_editor
 
 ## Test Case:
 
-    - test/test_edit_xml_tag_value.sh
+    - test/run.sh
 
 

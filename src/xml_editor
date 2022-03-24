@@ -59,12 +59,12 @@ function usage()
 {
     echo "Usage: "
     echo ""
-    echo "      edit_xml_tag_value \"<tag_name>\" \"new_tag_value\" \"xml_file_name\""
+    echo "      $0 \"<tag_name>\" \"new_tag_value\" \"xml_file_name\""
     echo ""
     echo ""
     echo "Example: "
     echo ""
-    echo "      edit_xml_tag_value \"<employee_code>\" \"123456\" \"employee_profile.xml\""
+    echo "      $0 \"<employee_code>\" \"123456\" \"employee_profile.xml\""
     echo ""
     echo ""
 }
